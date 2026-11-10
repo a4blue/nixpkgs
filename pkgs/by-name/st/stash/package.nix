@@ -40,6 +40,10 @@ buildGoModule (finalAttrs: {
 
   subPackages = [ "cmd/stash" ];
 
+  preConfigure = ''
+    export HOME=$(mktemp -d)
+  '';
+
   postConfigure = ''
     cp -a ${finalAttrs.passthru.frontend} ui/v2.5/build
     # `go mod tidy` requires internet access and does nothing
